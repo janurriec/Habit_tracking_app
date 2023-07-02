@@ -73,12 +73,32 @@ def select_habit():
         selected_habit = Habit.daily_habit_set[int(habit_todo_1)]
         User.user_todo_list[1] = selected_habit
         print("\n {} has been added to your list. \n".format(selected_habit))
-        counter.add_counter(db, selected_habit, None)
-        db.add_counter(db, selected_habit, datetime)
     else:
         print("Invalid input.")
     
+    habit_todo_2 = input(">>Enter the number of the Habit you want to add on your list. \n")
+    if int(habit_todo_2) <= len(Habit.daily_habit_set):
+        selected_habit = Habit.daily_habit_set[int(habit_todo_2)]
+        User.user_todo_list[2] = selected_habit
+        print("\n {} has been added to your list. \n".format(selected_habit))
+    else:
+        print("Invalid input.")
 
+    habit_todo_3 = input(">>Enter the number of the Habit you want to add on your list. \n")
+    if int(habit_todo_3) <= len(Habit.daily_habit_set):
+        selected_habit = Habit.daily_habit_set[int(habit_todo_3)]
+        User.user_todo_list[3] = selected_habit
+        print("\n {} has been added to your list. \n".format(selected_habit))
+    else:
+        print("Invalid input.")
+
+    habit_todo_4 = input(">>Enter the number of the Habit you want to add on your list. \n")
+    if int(habit_todo_4) <= len(Habit.daily_habit_set):
+        selected_habit = Habit.daily_habit_set[int(habit_todo_4)]
+        User.user_todo_list[4] = selected_habit
+        print("\n {} has been added to your list. \n".format(selected_habit))
+    else:
+        print("Invalid input.")
     
 
     def numerated_weekly_habit():
@@ -94,9 +114,11 @@ def select_habit():
         print("\n {} has been added to your list. \n".format(selected_habit))
     else:
         print("Invalid input.")
-    db.add_counter(db, select_habit, None)
+    
 
     print("\nThese are the habits you need to do:\n")
+    for i in User.user_todo_list:
+        db.add_counter(db, i, None)
     print(User.user_todo_list)
         
 
@@ -159,6 +181,7 @@ class Habit:
                 print("You have earned points from doing this habit.\n")
             else:
                 print("You need to work on your habits.")
+
 
 
         '''for item in enumerate(User.user_todo_list):
