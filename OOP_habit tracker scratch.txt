@@ -1,0 +1,181 @@
+import datetime
+
+
+class User:
+    ''''Creating a User class to store information of the user including name, level and points earned'''
+    def __init__(self,name, level, points):
+        self.name = name
+        self.level = level
+        self.points = points
+        pass
+
+def greeting(self):
+    '''initial interface menu set up: 1) Add a habit 2) Add a Habit to do 3) View Habits 4) Record a Habit 5) Check Status 6) Analytics'''
+    menu = "\nHello {}! What would you like to do?\nSelect from the menu.".format(self.name)
+    print(menu)
+    selection = input("\n 1) View Habits Menu \n 2) Add a Habit to do \n 3) View Your Habits list \n 4) Record a Habit \n 5) Check Status \n 6) Analytics \n")
+    if selection == str(1):
+        '''directs to adding a habit in to-do list'''
+        print(username.view_habit_list())
+            
+    elif selection == str(2):
+        '''allows user to select and add habits to own list'''
+        print(username.select_habit())    
+            
+    elif selection == str(3):
+        '''view habits list'''
+        print(username.back())
+    
+    elif selection == str(4):
+            '''records/checks off habit in list'''
+    elif selection == str(5):
+        '''check user level and points status'''
+        print(username.check_level())
+        print(username.check_points())
+        print(username.back())
+    elif selection == str(6):
+        '''returns data analytics'''
+        print(username.back())
+    else:
+        return "Invalid key."
+    print(username.back())
+    return selection
+    
+    def level_up(self, level): 
+        '''level_up system set up: user levels up +1 for every 100 points earned. Points only accumulate and do not reset.'''
+        if self.points >= level * 100:
+            level += 1
+        return "Congratulations! You have leveled up! You're now at level {}. Keep it up!\n".format(self.level)
+    
+    '''Analytics portion for user'''
+    def check_level(self): 
+        '''checks the user level to monitor points and level correlation'''
+        next_level = self.level * 100
+        points_needed = next_level - self.points
+        return "You are at level {} and currently have {} points. \nYou need {} more points to reach the next level. \n".format(self.level, self.points, points_needed)
+    
+    '''Analytics portion for user'''
+    def check_points(self): 
+        '''checks the user level to monitor points and level correlation'''
+        return "{} you currently have {} points.".format(self.name, self.points)
+    
+    def view_habit_list(self):
+        '''view pre-made Habits list'''
+        print("These are the Habits you can improve upon:")
+        print("DAILY TASK:\n")
+        for i, habit in enumerate(Habit.daily_habit_set, 1):
+            print(f"{i} {habit}")
+        print("WEEKLY TASK:\n")
+
+        for i, habit in enumerate(Habit.weekly_habit_set, 1):
+            print(f"{i} {habit}")
+        print(username.back())
+    
+
+    def select_habit(self):
+        """this is the input section of 2) Add a Habit to do menu"""
+        ###should have the ability to Edit delete items from list too###
+        ###weekly input was not added and returned properly to habit_todo_list, pls check###
+        ###needs some editing for the db addition###
+        habit_todo_list = {}
+        print("\n Select 4 Habits to add to your list. \n")
+        for i, value in habit_todo_list:
+            habit_todo_1 = input(">>Enter the number of the Habit you want to add on your list. \n")
+            habit_todo_int = int(habit_todo_1)
+            if habit_todo_int <= len(Habit.daily_habit_set):
+                selected_habit = Habit.daily_habit_set[habit_todo_int - 1]
+                Habit.user_todo_list[i]=(selected_habit)
+                habit_todo_list[i].append(selected_habit)
+                print("\n {} has been added to your list. \n".format(selected_habit.name))
+            else:
+                print("Invalid input.")
+
+                print("Here's your Habit list:")
+                 ### habits todo list needs to be printed here ###
+        for item in habit_todo_list:
+            print(item)
+        print(username.back())
+
+            
+
+    
+    def back(self):
+        '''return to Main Selection Menu'''
+        back_ask = input("Go back? \n Press X to go to Main Menu.")
+        if back_ask == "X" or "x":
+            print(username.greeting())
+        else:
+            None
+    
+    
+
+
+class Habit:
+    '''Creating a Habit class to store info and methods for habits created'''
+    daily_habit_set = []
+    weekly_habit_set = []
+    user_todo_list = []
+
+    '''Creating a Habit class to store info and methods for habits created'''
+    def __init__(self, name, frequency, points):
+        self.name = name
+        self.frequency = frequency
+        self.points = points
+        if frequency == "daily": 
+            Habit.daily_habit_set.append(self)
+        elif frequency == "weekly":
+            Habit.weekly_habit_set.append(self)
+
+    def check_habit(self,user):
+        '''confirm if habit is done'''
+        answer = input("Did you do {} habit today? Enter Y for yes or N for no. \n".format(self.name))
+        if answer == "Y":
+            user.points += self.points
+            print("You have earned {} points from doing this habit. \n".format(self.points))
+        else:
+            print("You need to work on your habits.")
+
+
+        
+class Task(Habit):
+    def __str__(self):
+        return "{name} : {frequency}. \n Accomplishing this will earn you {points} points. \n".format(name = self.name, frequency = self.frequency, points = self.points)
+    
+    def chosen_habit(self):
+        print("You have added {} in your Habit list.".format(self.name))
+
+
+drink_water = Task("Drink water", "daily", 5)
+read_book = Task("Read 5 pages", "daily", 5)
+workout = Task("Do a physical activity", "daily", 5)
+do_chores = Task("Do household chores", "daily", 5)
+eat_on_time = Task("Eat meal on time", "daily", 5)
+take_meds = Task("Take medication on time", "daily", 5)
+write_journal = Task("Write daily journal", "daily", 5)
+learn_1hr = Task("Study for one hour", "daily", 5)
+
+go_to_therapy = Task("Go to therapy", "weeklky", 10)
+do_fun_stuff = Task("Do something for myself", "weekly", 10)
+go_long_walk = Task("Go for a long walk", "weekly", 10)
+learn_new_skill = Task("Learn a new skill", "weekly", 10)
+
+
+
+print("--------------\n"+ "Habit Tracker App"+ "\n--------------\n")
+temp_user = input("Enter a username: ")
+username = User(temp_user, 1, 10)
+now = datetime.datetime.now()
+print(now)
+
+print(username.greeting())
+
+
+
+'''
+print(username.check_level())
+print(drink_water)
+drink_water.check_habit(username)
+print(username.check_points())
+print(username.check_level())
+'''
+
