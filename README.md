@@ -31,7 +31,7 @@ Thank you and enjoy using the app!
 #Test
 
 '''shell
-pytest .
+pytest ---
 '''
 
 
